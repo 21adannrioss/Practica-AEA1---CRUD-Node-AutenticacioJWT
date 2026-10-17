@@ -1,0 +1,58 @@
+<%- include('includes/header') %>
+<section class="targeta">
+  <h1>Usuaris</h1>
+  <table>
+    <thead><tr><th>Id</th><th>Usuari</th><th>Correu</th><th>Rol</th><th></th></tr></thead>
+    <tbody>
+      <% usuaris.forEach((u) => { %>
+        <tr>
+          <td><%= u.id %></td>
+          <td><%= u.usuari %></td>
+          <td><%= u.correu %></td>
+          <td><span class="etiqueta etiqueta-<%= u.rol %>"><%= u.rol %></span></td>
+          <td class="accions">
+            <button class="secundari editar-usuari" data-id="<%= u.id %>" data-usuari="<%= u.usuari %>" data-correu="<%= u.correu %>" data-rol="<%= u.rol %>">Editar</button>
+            <% if (u.id !== usuari.id) { %>
+              <button class="perill esborrar-usuari" data-id="<%= u.id %>">Esborrar</button>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+
+<section class="targeta">
+  <form id="formulari-usuari">
+    <h2 id="titol-formulari">Afegir un usuari</h2>
+    <input type="hidden" id="usuari-id">
+    <div class="dues-columnes">
+      <div>
+        <label for="usuari-nom">Usuari</label>
+        <input type="text" id="usuari-nom" required>
+      </div>
+      <div>
+        <label for="usuari-correu">Correu</label>
+        <input type="email" id="usuari-correu" required>
+      </div>
+      <div>
+        <label for="usuari-contrasenya" id="etiqueta-contrasenya">Contrasenya</label>
+        <input type="password" id="usuari-contrasenya" required>
+      </div>
+      <div>
+        <label for="usuari-rol">Rol</label>
+        <select id="usuari-rol">
+          <option value="usuari">usuari</option>
+          <option value="admin">admin</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" id="boto-desar">Afegir usuari</button>
+    <button type="button" class="secundari" id="boto-cancelar" hidden>Cancel·lar</button>
+    <span class="missatge">&nbsp;</span>
+  </form>
+</section>
+<%- include('includes/footer') %>
+<script src="/js/usuaris.js"></script>
+</body>
+</html>

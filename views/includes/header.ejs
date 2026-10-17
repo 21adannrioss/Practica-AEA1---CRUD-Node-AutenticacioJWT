@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= titol %> - Biblioteca</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="menu">
+    <a class="logo" href="/">Biblioteca</a>
+    <nav>
+      <a href="/">Inici</a>
+      <% if(usuari) { %>
+        <a href="/protected">Zona privada</a>
+        <% if(usuari.rol === 'admin') { %>
+          <a href="/admin">Usuaris</a>
+        <% } %>
+        <a href="/profile">Perfil</a>
+        <button id="tancar-sessio" class="boto-enllac">Tancar sessió (<%= usuari.usuari %>)</button>
+      <% } else { %>
+        <a href="/login">Accedir</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="contenidor">

@@ -1,0 +1,107 @@
+### Usuaris: admin/Admin1234, anna/Anna1234, joan/Joan1234
+
+@urlBase = http://localhost:3000
+
+### Registre d'un usuari nou (també inicia sessió amb la cookie)
+# @name maria
+POST {{urlBase}}/register
+Content-Type: application/json
+
+{"usuari": "maria", "correu": "maria@biblioteca.cat", "contrasenya": "Maria1234"}
+
+### Registre amb dades incorrectes, ha de donar 400
+POST {{urlBase}}/register
+Content-Type: application/json
+
+{"usuari": "ab", "correu": "correu", "contrasenya": "123"}
+
+### Login amb una contrasenya incorrecta, ha de donar 401
+POST {{urlBase}}/login
+Content-Type: application/json
+
+{"usuari": "anna", "contrasenya": "Incorrecta1"}
+
+### Login com a anna (usuari normal). Es guarda la cookie amb el token.
+POST {{urlBase}}/login
+Content-Type: application/json
+
+{"usuari": "anna", "contrasenya": "Anna1234"}
+
+### Consulta de tots els llibres
+GET {{urlBase}}/books
+
+### Consulta d'un llibre pel seu id
+GET {{urlBase}}/books/3
+
+### Creació d'un llibre nou (el propietari serà anna)
+# @name llibreNou
+POST {{urlBase}}/books
+Content-Type: application/json
+
+{"titol": "Tirant lo Blanc", "autor": "Joanot Martorell", "any": 1490}
+
+### Creació del mateix llibre una altra vegada, ha de donar 409
+POST {{urlBase}}/books
+Content-Type: application/json
+
+{"titol": "Tirant lo Blanc", "autor": "Joanot Martorell", "any": 1490}
+
+### Modificació d'un llibre propi
+PUT {{urlBase}}/books/{{llibreNou.response.body.id}}
+Content-Type: application/json
+
+{"titol": "Tirant lo Blanc", "autor": "Joanot Martorell", "any": 1491}
+
+### Intent de modificar el llibre 5, que és de joan, ha de donar 403
+PUT {{urlBase}}/books/5
+Content-Type: application/json
+
+{"titol": "Canigó", "autor": "Jacint Verdaguer", "any": 1886}
+
+### Eliminació del llibre que hem creat
+DELETE {{urlBase}}/books/{{llibreNou.response.body.id}}
+
+### Consulta dels usuaris. Un usuari normal només veu l'id, el nom d'usuari i el rol.
+GET {{urlBase}}/users
+
+### Consulta de les meves dades
+GET {{urlBase}}/users/2
+
+### Intent de crear un usuari sense ser admin, ha de donar 403
+POST {{urlBase}}/users
+Content-Type: application/json
+
+{"usuari": "intrus", "correu": "intrus@biblioteca.cat", "contrasenya": "Intrus1234"}
+
+### Tancament de sessió. S'esborra la cookie.
+POST {{urlBase}}/logout
+
+### Accés als llibres sense haver iniciat sessió, ha de donar 401
+GET {{urlBase}}/books
+
+### Login com a admin
+POST {{urlBase}}/login
+Content-Type: application/json
+
+{"usuari": "admin", "contrasenya": "Admin1234"}
+
+### Consulta de tots els usuaris. L'admin veu tots els camps menys la contrasenya.
+GET {{urlBase}}/users
+
+### Creació d'un usuari per part de l'admin
+# @name pere
+POST {{urlBase}}/users
+Content-Type: application/json
+
+{"usuari": "pere", "correu": "pere@biblioteca.cat", "contrasenya": "Pere1234", "rol": "usuari"}
+
+### Canvi del rol de pere per part de l'admin
+PUT {{urlBase}}/users/{{pere.response.body.id}}
+
+{"rol": "admin"}
+
+### Eliminació de l'usuari pere per part de l'admin
+DELETE {{urlBase}}/users/{{pere.response.body.id}}
+
+### Eliminació de la maria, que hem registrat al principi
+DELETE {{urlBase}}/users/{{maria.response.body.usuari.id}}

@@ -1,0 +1,15 @@
+<%- include('includes/header') %>
+<section class="targeta">
+  <% if(usuari) { %>
+    <h1>Hola, <%= usuari.usuari %>!</h1>
+    <p>Has iniciat sessió com a <span class="etiqueta etiqueta-<%= usuari.rol %>"><%= usuari.rol %></span>.</p>
+    <p><a class="boto" href="/protected">Anar a la zona privada</a></p>
+  <% } else { %>
+    <h1>Benvingut a la Biblioteca</h1>
+    <p>Aplicació amb login amb JWT i una API REST per gestionar llibres i usuaris.</p>
+    <p><a class="boto" href="/login">Inicia sessió o registra't</a></p>
+  <% } %>
+</section>
+<%- include('includes/footer') %>
+</body>
+</html>

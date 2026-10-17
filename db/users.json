@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "usuari": "admin",
+    "correu": "admin@biblioteca.cat",
+    "contrasenya": "$2b$10$utPZ2WRdp3PDf2R6d.Uze.oJlH1fEFAXaD63Vz4BU57o4LdPkGIPy",
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "usuari": "anna",
+    "correu": "anna@biblioteca.cat",
+    "contrasenya": "$2b$10$lCMRI77.uavCvt5jQziaOu9Y2l45aXoWfUZoe5M/5xYGsCR.u.qoG",
+    "rol": "usuari"
+  },
+  {
+    "id": 3,
+    "usuari": "joan",
+    "correu": "joan@biblioteca.cat",
+    "contrasenya": "$2b$10$7QJ8sAKkNWGtS4Q1wu8c1OppmXVtfB5RTp9lcaJsYyLkMf5ybbAsW",
+    "rol": "usuari"
+  }
+]

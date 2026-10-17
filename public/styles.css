@@ -1,0 +1,59 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f2f3f7;
+  color: #222;
+}
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: #2b3a67;
+  color: white;
+}
+.menu a, .boto-enllac { color: white; text-decoration: none; margin-left: 16px; }
+.menu .logo { font-weight: bold; font-size: 20px; margin-left: 0; }
+.boto-enllac { background: none; border: none; cursor: pointer; font-size: 16px; padding: 0; margin-top: 0; }
+.boto-enllac:hover, .menu a:hover { text-decoration: underline; background: none; }
+.contenidor { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+.targeta {
+  background: white;
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+.dues-columnes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 700px) { .dues-columnes { grid-template-columns: 1fr; } }
+label { display: block; margin-top: 12px; font-weight: bold; font-size: 14px; }
+input, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #aaa; border-radius: 4px; }
+button, .boto {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: #2b3a67;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+}
+button:hover, .boto:hover { background: #3c4f8f; }
+[hidden] { display: none !important; }
+.accions { white-space: nowrap; }
+.accions button { margin-top: 0; margin-right: 4px; padding: 4px 10px; font-size: 14px; }
+button.secundari { background: #777; }
+button.secundari:hover { background: #999; }
+button.perill { background: #c0392b; }
+button.perill:hover { background: #e74c3c; }
+.missatge { margin-left: 12px; font-size: 14px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+table.perfil th { width: 35%; }
+.etiqueta { padding: 2px 10px; border-radius: 10px; color: white; font-size: 14px; }
+.etiqueta-admin { background: #c0392b; }
+.etiqueta-usuari { background: #27ae60; }
+.footer { text-align: center; color: #777; font-size: 14px; padding: 24px; }

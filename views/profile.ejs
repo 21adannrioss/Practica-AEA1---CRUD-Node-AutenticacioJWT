@@ -1,0 +1,28 @@
+<%- include('includes/header') %>
+<section class="targeta">
+  <h1>El meu perfil</h1>
+  <table class="perfil">
+    <tr><th>Id</th><td><%= usuari.id %></td></tr>
+    <tr><th>Usuari</th><td><%= usuari.usuari %></td></tr>
+    <tr><th>Correu</th><td><%= usuari.correu %></td></tr>
+    <tr><th>Rol</th><td><span class="etiqueta etiqueta-<%= usuari.rol %>"><%= usuari.rol %></span></td></tr>
+  </table>
+</section>
+
+<section class="targeta">
+  <form id="formulari-perfil" data-id="<%= usuari.id %>">
+    <h2>Canviar les meves dades</h2>
+    <label for="perfil-correu">Correu</label>
+    <input type="email" id="perfil-correu" value="<%= usuari.correu %>" required>
+
+    <label for="perfil-contrasenya">Contrasenya nova (si no la vols canviar deixa-ho buit)</label>
+    <input type="password" id="perfil-contrasenya">
+
+    <button type="submit">Desar</button>
+    <span class="missatge">&nbsp;</span>
+  </form>
+</section>
+<%- include('includes/footer') %>
+<script src="/js/perfil.js"></script>
+</body>
+</html>

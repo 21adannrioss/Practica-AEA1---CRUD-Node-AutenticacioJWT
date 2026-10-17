@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "titol": "Los 7 hábitos de la gente altamente efectiva",
+    "autor": "Stephen R. Covey",
+    "any": 1989,
+    "propietariId": 1
+  },
+  {
+    "id": 2,
+    "titol": "Padre rico, padre pobre",
+    "autor": "Robert Kiyosaki",
+    "any": 1997,
+    "propietariId": 1
+  },
+  {
+    "id": 3,
+    "titol": "Solitud",
+    "autor": "Víctor Català",
+    "any": 1905,
+    "propietariId": 2
+  },
+  {
+    "id": 4,
+    "titol": "La plaça del Diamant",
+    "autor": "Mercè Rodoreda",
+    "any": 1962,
+    "propietariId": 2
+  },
+  {
+    "id": 5,
+    "titol": "Canigó",
+    "autor": "Jacint Verdaguer",
+    "any": 1886,
+    "propietariId": 3
+  },
+  {
+    "id": 6,
+    "titol": "El Petit Príncep",
+    "autor": "Antoine de Saint-Exupéry",
+    "any": 1943,
+    "propietariId": 3
+  }
+]

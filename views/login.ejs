@@ -1,0 +1,39 @@
+<%- include('includes/header') %>
+<div class="dues-columnes">
+  <section class="targeta">
+    <form id="formulari-login">
+      <h2>Iniciar sessió</h2>
+      <label for="login-usuari">Usuari</label>
+      <input type="text" id="login-usuari" required>
+
+      <label for="login-contrasenya">Contrasenya</label>
+      <input type="password" id="login-contrasenya" required>
+
+      <button type="submit">Entrar</button>
+      <span class="missatge">&nbsp;</span>
+    </form>
+  </section>
+
+  <section class="targeta">
+    <form id="formulari-registre">
+      <h2>Registre</h2>
+      <label for="registre-usuari">Usuari</label>
+      <input type="text" id="registre-usuari" required>
+
+      <label for="registre-correu">Correu</label>
+      <input type="email" id="registre-correu" required>
+
+      <label for="registre-contrasenya">Contrasenya</label>
+      <input type="password" id="registre-contrasenya" required>
+
+      <label for="registre-repetir">Repeteix la contrasenya</label>
+      <input type="password" id="registre-repetir" required>
+
+      <button type="submit">Registrar-me</button>
+      <span class="missatge">&nbsp;</span>
+    </form>
+  </section>
+</div>
+<%- include('includes/footer') %>
+</body>
+</html>
