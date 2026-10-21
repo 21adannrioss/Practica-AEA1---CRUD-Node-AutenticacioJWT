@@ -73,7 +73,7 @@ Les peticions s'executen en ordre, la cookie es guarda sola entre peticions.
 
 1. Registre d'un usuari nou: 201 i es crea la cookie.
 
-![](captures\api-01-register-ok.png)
+![](captures/api-01-register-ok.png)
 
 2. Login amb contrasenya incorrecta: 401.
 
