@@ -1,13 +1,13 @@
 <%- include('includes/header') %>
 <section class="targeta">
   <h1>Zona privada</h1>
-  <p>Hola <strong><%= usuari.usuari %></strong>! Aquesta pàgina només la pots veure si has iniciat sessió.</p>
+  <p>Hola <strong><%= usuari.usuari %></strong>, aquesta pàgina només la pots veure si has iniciat sessió.</p>
   <p>Rol: <span class="etiqueta etiqueta-<%= usuari.rol %>"><%= usuari.rol %></span></p>
 </section>
 
 <section class="targeta">
   <h2>Llibres</h2>
-  <p>Només pots modificar i esborrar els teus llibres<% if (usuari.rol === 'admin') { %>, però com a admin pots fer-ho amb tots<% } %>.</p>
+  <p>Només pots modificar i esborrar els teus llibres<% if(usuari.rol === 'admin') { %>, però com a admin pots fer-ho amb tots<% } %>.</p>
   <table>
     <thead><tr><th>Títol</th><th>Autor</th><th>Any</th><th>Propietari</th><th></th></tr></thead>
     <tbody>

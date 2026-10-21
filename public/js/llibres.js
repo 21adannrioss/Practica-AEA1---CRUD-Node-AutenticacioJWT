@@ -21,15 +21,21 @@ formulari.addEventListener('submit', async (e) => {
     autor: document.querySelector('#llibre-autor').value,
     any: parseInt(document.querySelector('#llibre-any').value)
   }
-  const resposta = await fetch(id ? '/books/' + id : '/books', {
-    method: id ? 'PUT' : 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  let url = '/books'
+  let metode = 'POST'
+  if(id) {
+    url = '/books/' + id
+    metode = 'PUT'
+  }
+  const resposta = await fetch(url, {
+    method: metode,
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(llibre)
   })
   const dades = await resposta.json()
-  if (resposta.ok) {
+  if(resposta.ok) {
     window.location.reload() // es recarrega per veure els canvis a la taula
-  } else {
+  } else{
     span.innerText = dades.error
     span.style.color = 'red'
   }
@@ -54,9 +60,9 @@ botoCancelar.addEventListener('click', netejar)
 
 document.querySelectorAll('.esborrar-llibre').forEach((boto) => {
   boto.addEventListener('click', async () => {
-    if (!confirm('Segur que vols esborrar el llibre?')) return
+    if(!confirm('Segur que vols esborrar el llibre?')) return
     const resposta = await fetch('/books/' + boto.dataset.id, { method: 'DELETE' })
-    if (resposta.ok) window.location.reload()
+    if(resposta.ok) window.location.reload()
     else alert('No s\'ha pogut esborrar')
   })
 })

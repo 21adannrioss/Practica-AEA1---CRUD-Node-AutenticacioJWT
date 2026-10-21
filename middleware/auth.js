@@ -12,7 +12,7 @@ export const carregarSessio = (req, res, next) => {
 
   try {
     const dades = jwt.verify(token, CLAU_SECRETA)
-    // busquem l'usuari al json per tenir totes les seves dades
+    // es busca l'usuari al json per tenir totes les seves dades
     const usuari = UsuariRepository.buscarPerId(dades.id)
     if(usuari) {
       req.session.user = usuari
@@ -37,8 +37,8 @@ export const necessitaLoginPagina = (req, res, next) => {
   next()
 }
 
-// comprova el rol, si no el té dona 403
-export const necessitaRol = (...rols) => (req, res, next) => {
-  if(!rols.includes(req.session.user.rol)) return res.status(403).json({ error: 'No tens permisos per fer això' })
+// només deixa passar l'admin, si no dona 403
+export const necessitaAdmin = (req, res, next) => {
+  if(req.session.user.rol !== 'admin') return res.status(403).json({ error: 'No tens permisos per fer això' })
   next()
 }

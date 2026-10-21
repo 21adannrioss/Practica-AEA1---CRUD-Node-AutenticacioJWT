@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { UsuariRepository } from '../user-repository.js'
 import { crearError } from '../fitxers.js'
-import { necessitaRol } from '../middleware/auth.js'
+import { necessitaAdmin } from '../middleware/auth.js'
 
 const router = Router()
 
@@ -12,7 +12,11 @@ const esElMateix = (req) => req.session.user.id === Number(req.params.id)
 router.get('/', (req, res) => {
   const usuaris = UsuariRepository.llistar()
   if (esAdmin(req)) return res.json(usuaris)
-  res.json(usuaris.map((u) => ({ id: u.id, usuari: u.usuari, rol: u.rol })))
+  const resum = []
+  for (const u of usuaris) {
+    resum.push({id: u.id, usuari: u.usuari, rol: u.rol})
+  }
+  res.json(resum)
 })
 
 // veure un usuari, només el mateix usuari o l'admin
@@ -26,8 +30,8 @@ router.get('/:id', (req, res) => {
 })
 
 // crear usuari, només admin
-router.post('/', necessitaRol('admin'), async (req, res) => {
-  const usuari = await UsuariRepository.crear(req.body ?? {})
+router.post('/', necessitaAdmin, async (req, res) => {
+  const usuari = await UsuariRepository.crear(req.body)
   res.status(201).json(usuari)
 })
 
@@ -36,12 +40,12 @@ router.put('/:id', async (req, res) => {
   if (!esAdmin(req) && !esElMateix(req)) {
     throw crearError(403, 'No pots modificar un altre usuari')
   }
-  const usuari = await UsuariRepository.modificar(req.params.id, req.body ?? {}, esAdmin(req))
+  const usuari = await UsuariRepository.modificar(req.params.id, req.body, esAdmin(req))
   res.json({ missatge: 'Usuari modificat', usuari })
 })
 
 // esborrar usuari, només admin
-router.delete('/:id', necessitaRol('admin'), (req, res) => {
+router.delete('/:id', necessitaAdmin, (req, res) => {
   const usuari = UsuariRepository.esborrar(req.params.id)
   res.json({ missatge: 'Usuari esborrat', usuari })
 })

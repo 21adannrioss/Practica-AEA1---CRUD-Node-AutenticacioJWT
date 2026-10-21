@@ -1,59 +1,125 @@
 * { box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f2f3f7;
-  color: #222;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #eef1f7;
+  color: #2d3142;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+h1, h2 { color: #1f2a50; margin-top: 0; }
+
+/* menú de dalt */
 .menu {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  background: #2b3a67;
+  padding: 14px 32px;
+  background: linear-gradient(90deg, #1f2a50, #3a4f9b);
   color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
-.menu a, .boto-enllac { color: white; text-decoration: none; margin-left: 16px; }
-.menu .logo { font-weight: bold; font-size: 20px; margin-left: 0; }
-.boto-enllac { background: none; border: none; cursor: pointer; font-size: 16px; padding: 0; margin-top: 0; }
-.boto-enllac:hover, .menu a:hover { text-decoration: underline; background: none; }
-.contenidor { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+.menu a, .boto-enllac { color: white; text-decoration: none; margin-left: 20px; }
+.menu .logo { font-weight: bold; font-size: 22px; margin-left: 0; }
+.boto-enllac {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 0;
+  margin-top: 0;
+}
+.menu a:hover, .boto-enllac:hover { color: #ffd166; background: none; }
+
+.contenidor {
+  max-width: 950px;
+  margin: 32px auto;
+  padding: 0 16px;
+  width: 100%;
+  flex: 1;
+}
+
+/* targetes */
 .targeta {
   background: white;
-  border-radius: 8px;
-  padding: 16px 24px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 20px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(31, 42, 80, 0.1);
+  border-top: 4px solid #3a4f9b;
 }
-.dues-columnes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.dues-columnes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 @media (max-width: 700px) { .dues-columnes { grid-template-columns: 1fr; } }
-label { display: block; margin-top: 12px; font-weight: bold; font-size: 14px; }
-input, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #aaa; border-radius: 4px; }
+
+/* formularis */
+label { display: block; margin-top: 14px; font-weight: 600; font-size: 14px; }
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  border: 1px solid #c3c9d9;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: #3a4f9b;
+  box-shadow: 0 0 0 3px rgba(58, 79, 155, 0.2);
+}
+
+/* botons */
 button, .boto {
   display: inline-block;
-  margin-top: 16px;
-  padding: 8px 16px;
-  background: #2b3a67;
+  margin-top: 18px;
+  padding: 10px 18px;
+  background: #3a4f9b;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: background 0.2s;
 }
-button:hover, .boto:hover { background: #3c4f8f; }
+button:hover, .boto:hover { background: #26397a; }
+button.secundari { background: #7a8199; }
+button.secundari:hover { background: #5d6479; }
+button.perill { background: #d64545; }
+button.perill:hover { background: #b83030; }
 [hidden] { display: none !important; }
+
 .accions { white-space: nowrap; }
-.accions button { margin-top: 0; margin-right: 4px; padding: 4px 10px; font-size: 14px; }
-button.secundari { background: #777; }
-button.secundari:hover { background: #999; }
-button.perill { background: #c0392b; }
-button.perill:hover { background: #e74c3c; }
+.accions button { margin-top: 0; margin-right: 4px; padding: 5px 12px; font-size: 14px; }
 .missatge { margin-left: 12px; font-size: 14px; }
+
+/* taules */
 table { width: 100%; border-collapse: collapse; }
-th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid #e3e7f0; }
+th { background: #f4f6fb; color: #1f2a50; font-size: 14px; }
+tr:hover td { background: #f9fafd; }
 table.perfil th { width: 35%; }
-.etiqueta { padding: 2px 10px; border-radius: 10px; color: white; font-size: 14px; }
-.etiqueta-admin { background: #c0392b; }
-.etiqueta-usuari { background: #27ae60; }
-.footer { text-align: center; color: #777; font-size: 14px; padding: 24px; }
+
+/* etiquetes del rol */
+.etiqueta { padding: 3px 12px; border-radius: 12px; color: white; font-size: 13px; }
+.etiqueta-admin { background: #d64545; }
+.etiqueta-usuari { background: #2e9e6a; }
+
+.footer {
+  text-align: center;
+  color: #7a8199;
+  font-size: 14px;
+  padding: 24px;
+  margin-top: auto;
+}

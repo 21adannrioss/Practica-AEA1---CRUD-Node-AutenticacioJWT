@@ -10,12 +10,20 @@ export const usuariPublic = (usuari) => {
 
 // mira si ja hi ha un usuari amb aquest nom o correu (idIgnorar serveix quan modifiquem)
 const jaExisteix = (usuaris, camp, valor, idIgnorar) => {
-  return usuaris.some((u) => u.id !== idIgnorar && u[camp].toLowerCase() === valor.toLowerCase())
+  for(const u of usuaris){
+    if(u.id !== idIgnorar && u[camp].toLowerCase() === valor.toLowerCase()) return true
+  }
+  return false
 }
 
 export class UsuariRepository {
   static llistar () {
-    return llegirDades('users').map(usuariPublic)
+    const usuaris = llegirDades('users')
+    const llista = []
+    for (const u of usuaris) {
+      llista.push(usuariPublic(u))
+    }
+    return llista
   }
 
   static buscarPerId (id) {

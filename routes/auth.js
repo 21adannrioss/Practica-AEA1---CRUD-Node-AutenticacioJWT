@@ -28,7 +28,7 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-  const { usuari, correu, contrasenya } = req.body ?? {}
+  const { usuari, correu, contrasenya } = req.body
   // el rol sempre és usuari, així ningú es pot fer admin
   const nouUsuari = await UsuariRepository.crear({ usuari, correu, contrasenya, rol: 'usuari' })
   enviarToken(res, nouUsuari)
@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  const { usuari, contrasenya } = req.body ?? {}
+  const { usuari, contrasenya } = req.body
   const usuariTrobat = await UsuariRepository.login({ usuari, contrasenya })
   enviarToken(res, usuariTrobat)
   res.json({ missatge: 'Sessió iniciada', usuari: usuariTrobat })
@@ -47,13 +47,20 @@ router.post('/logout', (req, res) => {
   res.json({ missatge: 'Sessió tancada' })
 })
 
+// pàgina protegida, només per a usuaris amb sessió iniciada
 router.get('/protected', necessitaLoginPagina, (req, res) => {
   const usuaris = UsuariRepository.llistar()
-  // afegim el nom del propietari a cada llibre per mostrar-lo a la taula
-  const llibres = llegirDades('books').map((l) => {
-    const propietari = usuaris.find((u) => u.id === l.propietariId)
-    return { ...l, propietari: propietari ? propietari.usuari : '-' }
-  })
+  const llibres = llegirDades('books')
+
+  // s'afegeix el nom del propietari a cada llibre
+  for (const llibre of llibres) {
+    llibre.propietari = '-'
+    for (const u of usuaris) {
+      if (u.id === llibre.propietariId) {
+        llibre.propietari = u.usuari
+      }
+    }
+  }
   res.render('protected', { titol: 'Zona privada', llibres })
 })
 
@@ -63,8 +70,9 @@ router.get('/admin', necessitaLoginPagina, (req, res) => {
   res.render('admin', { titol: 'Usuaris', usuaris: UsuariRepository.llistar() })
 })
 
+// pàgina per veure i modificar el perfil de l'usuari, només per a l'usuari mateix
 router.get('/profile', necessitaLoginPagina, (req, res) => {
-  res.render('profile', { titol: 'El meu perfil' })
+  res.render('profile', {titol: 'El meu perfil'})
 })
 
 export default router

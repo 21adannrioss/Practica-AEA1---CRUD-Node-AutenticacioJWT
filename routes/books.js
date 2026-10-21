@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const dades = req.body ?? {}
+  const dades = req.body
   validarLlibre(dades)
   const llibres = llegirDades('books')
   comprovarRepetit(llibres, dades)
@@ -54,11 +54,11 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  const dades = req.body ?? {}
+  const dades = req.body
   const llibres = llegirDades('books')
   const posicio = llibres.findIndex((l) => l.id === Number(req.params.id))
-  if (posicio === -1) throw crearError(404, 'Llibre no trobat')
-  if (!potEditar(req, llibres[posicio])) {
+  if(posicio === -1) throw crearError(404, 'Llibre no trobat')
+  if(!potEditar(req, llibres[posicio])) {
     throw crearError(403, 'Només el propietari o un admin pot modificar aquest llibre')
   }
 
@@ -77,7 +77,7 @@ router.delete('/:id', (req, res) => {
     throw crearError(403, 'Només el propietari o un admin pot esborrar aquest llibre')
   }
 
-  // splice treu 1 element a partir de la posició
+  // splice per treure 1 element a partir de la posició
   const esborrat = llibres.splice(posicio, 1)[0]
   escriureDades('books', llibres)
   res.json({ missatge: 'Llibre esborrat', llibre: esborrat })

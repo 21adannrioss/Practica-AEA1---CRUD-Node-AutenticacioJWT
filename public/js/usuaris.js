@@ -14,7 +14,7 @@ const netejar = () => {
   span.innerText = ''
 }
 
-// si hi ha id fa PUT (modificar) i si no POST (afegir)
+// si hi ha id fa PUT i si no POST
 formulari.addEventListener('submit', async (e) => {
   e.preventDefault()
   const id = document.querySelector('#usuari-id').value
@@ -24,12 +24,12 @@ formulari.addEventListener('submit', async (e) => {
     rol: document.querySelector('#usuari-rol').value
   }
   const contrasenya = document.querySelector('#usuari-contrasenya').value
-  // en modificar només enviem la contrasenya si l'han escrit
+  // en modificar només s'envia la contrasenya si s'ha escrit
   if (contrasenya) usuari.contrasenya = contrasenya
 
-  const resposta = await fetch(id ? '/users/' + id : '/users', {
+  const resposta = await fetch(id? '/users/' + id : '/users', {
     method: id? 'PUT': 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {'Content-Type': 'application/json' },
     body: JSON.stringify(usuari)
   })
   const dades = await resposta.json()
@@ -61,6 +61,7 @@ document.querySelectorAll('.editar-usuari').forEach((boto) => {
 
 botoCancelar.addEventListener('click', netejar)
 
+// el botó esborrar elimina l'usuari
 document.querySelectorAll('.esborrar-usuari').forEach((boto) => {
   boto.addEventListener('click', async () => {
     if (!confirm('Segur que vols esborrar l\'usuari?')) return

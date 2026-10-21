@@ -27,8 +27,12 @@ app.use('/books', necessitaLogin, booksRoutes)
 // gestió d'errors
 app.use((err, req, res, next) => {
   const status = err.status || 500
-  if (status === 500) console.log(err)
-  res.status(status).json({ error: status === 500 ? 'Error del servidor' : err.message })
+  let missatge = err.message
+  if(status === 500) {
+    console.log(err)
+    missatge = 'Error del servidor'
+  }
+  res.status(status).json({error: missatge})
 })
 
 app.listen(PORT, () => {
